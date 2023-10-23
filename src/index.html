@@ -3,9 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./scss/index.scss">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+  />
     <title>Document</title>
 </head>
 <body>
-    <h1>JNSXJKNADK</h1>
+    <header>
+        <div class="logo">
+            <span class="logo-text">WILDBERRIES</span>
+        </div>
+        <div class="input">
+            <span class="icon-search"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="text" placeholder="Введите товар">
+        </div>
+        <div class="navigation">
+            <ul class="navigation-list">
+                <li class="navigation-list-item"><i class="fa-regular fa-heart icons"></i>
+                <span>Избранное</span></li>
+                <li class="navigation-list-item"><i class="fa-solid fa-cart-shopping icons"></i>
+                <span>Корзина</span></li>
+                <li class="navigation-list-item"><i class="fa-regular fa-user icons"></i>
+                <span>Профль</span></li>
+            </ul>
+        </div>
+    </header>
+
+
+   <section class="swiper">
+    <!-- Slider main container -->
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide slide">
+        <div class="slider-img">
+          <img src="https://sun9-9.userapi.com/impf/R7kvArrgUS4jHyLGql5uhXoZ0_J96HxPdz_PGQ/wpzWVoXJr40.jpg?size=1590x530&quality=95&crop=0,0,1590,530&sign=0075babdfe6b8830db4335a5df0ad215&type=cover_group" alt="#" />
+        </div>
+    
+      </div>
+
+      <div class="swiper-slide slide">
+        <div class="slider-img">
+          <img
+            src=https://grizly.club/uploads/posts/2022-12/1670981800_grizly-club-p-vaildberriz-logotip-png-14.png alt="#"
+          />
+        </div>
+      </div>
+
+    
+      </div>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+<!-- </div> -->
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>
