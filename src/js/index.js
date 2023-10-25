@@ -74,3 +74,7 @@ catalogWrap.append(cardItem);
   }
 
   console.log(1);
+
+
+
+  

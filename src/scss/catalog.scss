@@ -22,6 +22,7 @@
     justify-content: space-between;
     width: 250px;
     margin: 0 10px;
+    margin-top: 20px;
     margin-bottom: 10px;
 
     .card-img{
@@ -51,6 +52,7 @@ flex-direction: column;
 
 .right{
 display: flex;
+width: 100px;
 justify-content: space-between;
 }
 
@@ -77,16 +79,15 @@ font-size: 14px;
 
 .buy{
     margin-top: 5px;
-  border: none;
-  width: 100px;
-  height: 25px;
+    font-weight: 400;
     padding: 5px 11px 6px;
     border-radius: 6px;
-    font-family: 'Roboto', sans-serif;
-font-style:normal;
-font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    background-color: #cb11ab;
-    color: #fff;
+    height: auto;
+    background-color:#cb11ab;
+    color: white;
+    border: none;
+    width: 100px;
+    font-weight: 600;
 }
