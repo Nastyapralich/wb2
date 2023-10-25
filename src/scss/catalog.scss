@@ -90,4 +90,9 @@ font-size: 14px;
     border: none;
     width: 100px;
     font-weight: 600;
+    cursor: pointer;
+
+    &:hover{
+        background: #cb11acae;
+    }
 }

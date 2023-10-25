@@ -60,21 +60,30 @@ itemName.innerHTML = nameProd;
 
 cardName.append(itemName);
 
-
-
-
 const btn = document.createElement('button');
 btn.classList = 'buy';
 btn.innerHTML = 'В корзину';
 
+btn.addEventListener('click', () => {
+  addToCart(itemName.innerHTML, priceProd);
+});
+
 cardItem.append(cardImg,cardText,cardName, btn);
 
 catalogWrap.append(cardItem);
-
   }
 
-  console.log(1);
 
+
+  let cards = JSON.parse(localStorage.getItem('cards')) || [];
+
+  function addToCart(title, price) {
+    const item = { title, price };
+    cards.push(item);
+  
+    localStorage.setItem('cards', JSON.stringify(cards));
+    // alert('Товар добавлен в корзину');
+  }
 
 
   
