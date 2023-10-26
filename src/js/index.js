@@ -1,17 +1,27 @@
+import { addToCart } from './addToCart.js';
+import { generateSalePercent } from './generateSalePercent.js';
+import { see } from './see.js';
 import './slider.js';
 
 // let url = 'https://65367a0fbb226bb85dd2306e.mockapi.io/:endpoint';
 
-fetch('https://65367a0fbb226bb85dd2306e.mockapi.io/wildberries')
-  .then(response => response.json())
-  .then(data => data.forEach(element => createCard(element.img, element.price, element.dateOfDelivery, element.title)))
- 
 
-  function generateSalePercent (){ //скидка от 1 до 30%
-  let randomNumber = Math.random();
-  let result = Math.floor(randomNumber * (30 - 2 + 1)) + 2;
-  return result;
-  }
+function getCard(callback){
+  fetch('https://65367a0fbb226bb85dd2306e.mockapi.io/wildberries')
+  .then((response) => {
+   return response.json()
+  })
+  // .then(data => data.forEach(element => createCard(element.img, element.price, element.dateOfDelivery, element.title)))
+  .then((data) => {
+    callback(data)})
+}
+
+function showCard(d){
+   d.forEach( element => {createCard(element.img, element.price, element.dateOfDelivery, element.title)
+   });
+}
+
+getCard(showCard)
 
   function createCard(imgSrc, priceProd, delDate, nameProd){
  
@@ -89,35 +99,10 @@ see(cardImg);
   }
   
 
-  let cards = JSON.parse(localStorage.getItem('cards')) || [];
 
-  function addToCart(title, price, img, deliver) {
-    const item = { title, price, img, deliver };
-    cards.push(item);
-  
-    localStorage.setItem('cards', JSON.stringify(cards));
-    // alert('Товар добавлен в корзину');
-  }
+export let cards = JSON.parse(localStorage.getItem('cards')) || [];
 
-
-
-  function see(img){ //при наведении на картинку, появляется кнопка посмотреть подробнее
-const btn_details = document.createElement('button');
-btn_details.className = 'none-btn';
-btn_details.innerHTML = 'Подробнее';
-img.append(btn_details);
-img.addEventListener('mouseenter', () =>{
-  btn_details.className = 'details'
-})
-img.addEventListener('mouseleave', () => {
-  btn_details.className = 'none-btn';
-})
-
-seeCard(btn_details)
-  }
-
-
-function seeCard(button){
+export function seeCard(button){ //показать окно с карточкой товара
   button.addEventListener('click', () => {
 
     const newCard = document.createElement('div');
