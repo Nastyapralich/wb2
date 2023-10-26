@@ -1,6 +1,6 @@
-body{
-position: relative;
-}
+// body{
+// position: relative;
+// }
 .card-details{
     width: 700px;
     height: 600px;
@@ -12,7 +12,7 @@ position: relative;
     justify-content: space-between;
     border: none;
     border-radius: 30px;
-    position: absolute;
+    position: fixed;
     
 
     .imgElement{
@@ -31,13 +31,18 @@ position: relative;
     .textContainer{
         width: 40%;
         padding: 30px;
+        position: relative;
     }
     .done{
-        // position: absolute;
+        position: absolute;
+        width: 20px;
+        height: 20px;
         top: 10px;
         right: 20px;
         width: 20px;
         height: 20px;
+        background: rgba(128, 128, 128, 0.395);
+        border: none;
     }
 }
 
