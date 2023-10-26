@@ -118,29 +118,17 @@ seeCard(btn_details)
 
 
 function seeCard(button){
-  // const newCard = document.createElement('div');
-  // button.addEventListener('click', () => {
-  //    newCard.className = 'card-details';
-  // })
-
   button.addEventListener('click', () => {
 
     const newCard = document.createElement('div');
     newCard.className = 'card-details';
-    newCard.style.width = '500px';
-    newCard.style.height = '500px';
-    newCard.style.background = 'white';
-    newCard.style.position = 'absolute';
-    newCard.style.top = '62%';
-    newCard.style.left = '38%';
-    // newCard.style.transform = 'translate(-50%, -50%)';
-    newCard.style.zIndex = '9999';
+    newCard.style.zIndex = '6';
     newCard.style.border = '2px solid black'
 
 
-    const done = document.createElement('button');
-    done.className = 'done';
-    done.innerHTML = 'Закрыть';
+    const btn_done = document.createElement('button');
+    btn_done.className = 'done';
+    btn_done.innerHTML = 'X';
 
   
     const img = button.parentElement.parentElement.querySelector('img');
@@ -148,31 +136,30 @@ function seeCard(button){
     const title = button.parentElement.parentElement.querySelector('.item-name').innerHTML;
     console.log(price, title);
 
-    // Set the image, price, and product name in the new card
-    const imgElement = document.createElement('img');
-    imgElement.src = img.src;
-    imgElement.style.width = '100px';
-imgElement.style.height = '100px'
+    const imgElement = document.createElement('div');
+    imgElement.className = 'imgElement'
+    const imgElementContent = document.createElement('img');
+    imgElementContent.src = img.src;
+    imgElement.append(imgElementContent)
+
+
+    const textContainer = document.createElement('div');
+    textContainer.className = 'textContainer'
     const priceElement = document.createElement('span');
     priceElement.textContent = price;
     const titleElement = document.createElement('span');
     titleElement.textContent = title;
 
+    textContainer.append(priceElement, titleElement)
+
     newCard.appendChild(imgElement);
-    newCard.appendChild(priceElement);
-    newCard.appendChild(titleElement);
-
-
-    // const par = button.parentElement.parentElement;
-    // par.innerHTML
-    // console.log(par);
-
-    newCard.appendChild(done);
+    newCard.appendChild(textContainer);
+    newCard.appendChild(btn_done);
 
     document.body.appendChild(newCard);
-    done.addEventListener('click', ()=>{
+
+    btn_done.addEventListener('click', ()=>{
       document.body.removeChild(newCard)
     })
   });
-
 }
