@@ -2,24 +2,30 @@
 // position: relative;
 // }
 .card-details{
-    width: 700px;
-    height: 600px;
+    width: 80%;
+    height: 80vh;
     background-color: white;
     // position: absolute;
-    top: 10%;
-    left: 27%;
+    top: 50%;
+    left: 50%;
     display: flex;
     justify-content: space-between;
     border: none;
-    border-radius: 30px;
     position: fixed;
-    
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    background-color: white;
+    border-radius: 30px;
+   
 
     .imgElement{
-        width: 40%;
-        height: 80%;
+        width: 50%;
+        height: 100%;
         overflow: hidden;
-        padding: 20px;
+        // padding: 20px;
+        text-align: center;
+        
+
         img{
             width: 100%;
             height: 100%;
@@ -31,20 +37,35 @@
     .textContainer{
         width: 40%;
         padding: 30px;
-        position: relative;
+        // position: relative;
     }
     .done{
-        position: absolute;
-        width: 20px;
-        height: 20px;
+        // position: absolute;
+        width: 50px;
+        height: 50px;
         top: 10px;
-        right: 20px;
-        width: 20px;
-        height: 20px;
-        background: rgba(128, 128, 128, 0.395);
+        right: 40px;
+        background: rgb(203, 165, 203);
+        font-size: 50px;
+        font-weight: 100;
         border: none;
-    }
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+&:hover{
+    background: rgb(146, 30, 146) ;
 }
+        &::after{
+position: absolute;
+content: '\00d7';
+right: 11px;
+top: -3px;
+color: white; 
+
+        }
+      }
+    }
+
 
 
 

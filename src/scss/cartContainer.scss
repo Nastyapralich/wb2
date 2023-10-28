@@ -1,0 +1,20 @@
+.cart-container{
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    top: 100px;
+    right: 100px;
+    background: #00000072;
+    z-index: 10;
+
+    .cart-item{
+        background-color: purple;
+        .cart-item_title{
+           color: white; 
+        }
+    }
+}
+
+.none-cart{
+    display: none;
+}
