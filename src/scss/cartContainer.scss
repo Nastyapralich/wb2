@@ -1,20 +1,81 @@
-.cart-container{
-    width: 300px;
-    height: 300px;
+.cart-container {
+    width: 500px;
+    // height: 300px;
     position: fixed;
     top: 100px;
     right: 100px;
-    background: #00000072;
+    background: #ffffff;
     z-index: 10;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgb(190, 93, 190);
 
-    .cart-item{
-        background-color: purple;
-        .cart-item_title{
-           color: white; 
+    .cart-item {
+        background-color: rgb(255, 255, 255);
+        align-items: baseline;
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+
+        .cart-item_title {
+            color: rgb(0, 0, 0);
+            margin-right: 10px;
+            display: block;
         }
+
+        .cart-item_price {
+            margin-right: 10px;
+            display: block;
+        }
+
+        .item-img {
+            height: 70px;
+            overflow: hidden;
+            display: block;
+        }
+
+        .delete-item {
+            display: block;
+            width: 50px;
+            height: 50px;
+            top: -6px;
+            right: 10px;
+            background: rgb(203, 165, 203);
+            font-size: 50px;
+            font-weight: 100;
+            border: none;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+
+            &::before {
+                content: "×";
+                right: 12px;
+                top: -3px;
+                color: white;
+                position: absolute;
+
+            }
+        }
+
+    }
+
+    button {
+        margin: auto;
+        height: 50px;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        padding: 11px 32px 15px;
+        border-radius: 20px;
+        border: none;
+        color: white;
+        font-size: 16px;
+        background: linear-gradient(102.42deg, #da15b8 59.69%, #8d06cc);
+        cursor: pointer;
     }
 }
 
-.none-cart{
+.none-cart {
     display: none;
 }

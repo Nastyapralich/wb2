@@ -137,9 +137,9 @@ function seeCard(button){
       const textContainer = document.createElement('div');
       textContainer.className = 'textContainer'
       const priceElement = document.createElement('span');
-      priceElement.textContent = price;
+      priceElement.innerHTML = `Цена ${price}`;
       const titleElement = document.createElement('span');
-      titleElement.textContent = title;
+      titleElement.innerHTML = `Название ${title}`;
   
       textContainer.append(priceElement, titleElement)
   
@@ -169,21 +169,62 @@ const cartItem = document.createElement("div");
 cartItem.className = "cart-item";
 const titleItem = document.createElement("span");
 titleItem.className = "cart-item_title";
+const deleteItem = document.createElement('span');
+deleteItem.className = 'delete-item'
 const priceItem = document.createElement("span");
 priceItem.className = "cart-item_price";
-titleItem.innerHTML = cardItem.title;
-priceItem.innerHTML = cardItem.price;
-cartItem.append(priceItem, titleItem, button);
-cartC.append(cartItem);
+const itemImg = document.createElement('img');
+itemImg.className = 'item-img';
+titleItem.innerHTML = `Товар ${cardItem.title}`;
+priceItem.innerHTML = `Цена: ${cardItem.price}`;
+itemImg.src = cardItem.img;
+cartItem.append(itemImg, priceItem, titleItem, deleteItem);
+
+
+
+// const Sum1 = document.createElement('span');
+// Sum1.className = 'sum';
+// Sum1.innerHTML = '';
+
+
+cartC.append(cartItem, button);
 const wrap = document.getElementsByClassName("catalog-wrapper")[0];
 wrap.appendChild(cartC);
+deleteIt(deleteItem, cardItem);
 button.addEventListener("click", function () {
     cartC.remove();
     console.log("Корзина закрыта");
   });  
       });
+
+
     }
   }
 
+function deleteIt(button, cardItem){
+button.addEventListener('click', () =>{
+button.parentElement.remove(cardItem);
+let price = button.parentElement.price;
+console.log(price);
+let cards = localStorage.getItem("cards") ? JSON.parse(localStorage.getItem("cards")) : [];
+
+}
+)
+}
 
 
+// krestik.addEventListener('click', () => {
+//   krestik.parentElement.remove(list_item);
+//   let id = krestik.parentElement.id;
+//   console.log(id);
+//   let todos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
+//   console.log(todos);
+//   todos.forEach((task, index) => {
+
+//     if (id == task.id) {
+//       todos.splice(index, index + 1);
+//       localStorage.setItem("todos", JSON.stringify(todos));
+//       list_item.classList.toggle("checked");
+//       updateAllCount();
+//       updateCompletedCount();
+//     }

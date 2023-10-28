@@ -9,18 +9,19 @@
 
 .catalog-wrapper{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 -10px;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(150px,261px));
+    grid-gap: 50px 30px;
+    box-sizing: border-box;
+    margin-bottom: 42px;
+
 }
 
 .card-item{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 250px;
+    // width: 250px;
     margin: 0 10px;
     margin-top: 20px;
     margin-bottom: 10px;
