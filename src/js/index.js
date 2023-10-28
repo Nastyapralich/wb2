@@ -157,14 +157,14 @@ function seeCard(button){
 
 
   function showCartFromLocalStorage() {
-    const cards = localStorage.getItem('cards');
-    if (cards) {
-const cartItems = JSON.parse(cards);
-cartItems.forEach(cardItem => {
+const cards = localStorage.getItem('cards');
 const cartC = document.createElement("div");
 cartC.className = "cart-container";
 const button = document.createElement("button");
-button.innerHTML = "Закрыть корзину"; 
+button.innerHTML = "Закрыть корзину";
+    if (cards) {
+const cartItems = JSON.parse(cards);
+cartItems.forEach(cardItem => {
 const cartItem = document.createElement("div");
 cartItem.className = "cart-item";
 const titleItem = document.createElement("span");
