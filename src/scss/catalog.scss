@@ -25,6 +25,7 @@
     margin: 0 10px;
     margin-top: 20px;
     margin-bottom: 10px;
+    position: relative;
 
     .card-img{
         width: 100%;
@@ -77,6 +78,7 @@
 margin-top: 10px;
 text-align: left;
 display: flex;
+margin-bottom: 40px;
 // flex-direction: column;
 justify-content: space-between;
 
@@ -127,6 +129,9 @@ font-size: 14px;
     width: 100px;
     font-weight: 600;
     cursor: pointer;
+    position: absolute;
+    
+    bottom: 0;
 
     &:hover{
         background: #cb11acae;
