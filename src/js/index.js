@@ -1,6 +1,5 @@
 import './slider.js';
 
-
 //получаю объект с сервера
 
 fetch("https://65367a0fbb226bb85dd2306e.mockapi.io/wildberries")
@@ -60,7 +59,7 @@ itemName.innerHTML = nameProd;
 descr.innerHTML = description
 
   cardImg.appendChild(img);
-  cardTextWrapLeft.append(price,delivery, itemName, description);
+  cardTextWrapLeft.append(price,delivery, itemName, descr);
   cardTextWrapRight.append(sale, oldPrice);
   cardText.append(cardTextWrapLeft, cardTextWrapRight);
   cardItem.append(cardImg,cardText,  btn);
@@ -70,6 +69,7 @@ descr.innerHTML = description
   btn.addEventListener('click', function() {
     setLS(nameProd, description, priceProd, imgSrc);
     showCartFromLocalStorage();
+    showCartFromLocalStorage_NEW()
   });
 
   seeMore(cardImg)
@@ -155,14 +155,12 @@ function seeCard(button){
     });
   }
 
-
+//посмотреть корзину
   function showCartFromLocalStorage() {
-const cards = localStorage.getItem('cards');
 const cartC = document.createElement("div");
 cartC.className = "cart-container";
-const button = document.createElement("button");
-button.innerHTML = "Закрыть корзину";
-    if (cards) {
+const cards = localStorage.getItem('cards');
+      if (cards) {
 const cartItems = JSON.parse(cards);
 cartItems.forEach(cardItem => {
 const cartItem = document.createElement("div");
@@ -178,53 +176,76 @@ itemImg.className = 'item-img';
 titleItem.innerHTML = `Товар ${cardItem.title}`;
 priceItem.innerHTML = `Цена: ${cardItem.price}`;
 itemImg.src = cardItem.img;
+cartC.append(cartItem);
 cartItem.append(itemImg, priceItem, titleItem, deleteItem);
-
-
-
-// const Sum1 = document.createElement('span');
-// Sum1.className = 'sum';
-// Sum1.innerHTML = '';
-
-
-cartC.append(cartItem, button);
 const wrap = document.getElementsByClassName("catalog-wrapper")[0];
-wrap.appendChild(cartC);
-deleteIt(deleteItem, cardItem);
-button.addEventListener("click", function () {
-    cartC.remove();
-    console.log("Корзина закрыта");
-  });  
-      });
+wrap.append(cartC);
+  removefromLS (deleteItem, cartItem)
+ }
+ )}
 
-
-    }
+//  const allSum = 0;
+//  allSum.innerHTML = ` Общая сумма: ${getSum()}`;
+const button = document.createElement("button");
+button.innerHTML = "Закрыть корзину";
+cartC.append(button);
+button.addEventListener("click",  () => {
+   button.parentElement.remove(cartC)
+    console.log(button.parentElement);
+  })
+   
+   }  
+    
+  function removefromLS (deleteItem, cartItem){
+    deleteItem.addEventListener('click', function (){
+      deleteItem.parentElement.remove(cartItem)
+        console.log(deleteItem.parentElement.firstChild.src);
+        let cards = localStorage.getItem("cards") ? JSON.parse(localStorage.getItem("cards")) : [];
+        cards.forEach((card, index) => {
+          if(deleteItem.parentElement.firstChild.src == card.img){
+            cards.splice(index, index + 1);
+            localStorage.setItem("cards", JSON.stringify(cards));
+          }
+        })
+        localStorage.setItem("cards", JSON.stringify(cards));
+        // showCartFromLocalStorage();
+    });
   }
 
-function deleteIt(button, cardItem){
-button.addEventListener('click', () =>{
-button.parentElement.remove(cardItem);
-let price = button.parentElement.price;
-console.log(price);
-let cards = localStorage.getItem("cards") ? JSON.parse(localStorage.getItem("cards")) : [];
 
+  //посмотреть корзину при нажатии на корзину в хэдэре
+
+  const cartlogo = document.querySelector('.fa-cart-shopping');
+  cartlogo.addEventListener('click', showCartFromLocalStorage)
+
+
+//поиск по названию и описанию
+const input = document.querySelector('input');
+input.addEventListener('input', search);
+
+function search() {
+  const searchTerm = input.value.toLowerCase();
+  const cards = document.querySelectorAll('.card-item');
+
+  cards.forEach(card => {
+      const title = card.querySelector('.item-name').textContent.toLowerCase();
+      const description = card.querySelector('.description').textContent.toLowerCase();
+      
+      if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          card.style.display = 'block';
+      } else {
+          card.style.display = 'none';
+      }
+  });
 }
-)
+
+
+//общая сумма
+function getSum(){
+  let cards = localStorage.getItem("cards") ? JSON.parse(localStorage.getItem("cards")) : [];
+  let sum = 0;
+  cards.forEach((card) => {
+    sum += Number(card.price);
+    return sum;
+  })
 }
-
-
-// krestik.addEventListener('click', () => {
-//   krestik.parentElement.remove(list_item);
-//   let id = krestik.parentElement.id;
-//   console.log(id);
-//   let todos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
-//   console.log(todos);
-//   todos.forEach((task, index) => {
-
-//     if (id == task.id) {
-//       todos.splice(index, index + 1);
-//       localStorage.setItem("todos", JSON.stringify(todos));
-//       list_item.classList.toggle("checked");
-//       updateAllCount();
-//       updateCompletedCount();
-//     }
