@@ -20,7 +20,7 @@
 .card-item{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
     // width: 250px;
     margin: 0 10px;
     margin-top: 20px;
@@ -92,6 +92,10 @@ flex-direction: column;
 display: flex;
 width: 100px;
 justify-content: space-between;
+gap: 10px;
+span{
+    display: block;
+}
 }
 
 .price{

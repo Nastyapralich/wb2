@@ -5,17 +5,18 @@ import './slider.js';
 fetch("https://65367a0fbb226bb85dd2306e.mockapi.io/wildberries")
 .then((response) => {return response.json()})
 .then((data) => {console.log(data);
-data.forEach(element => {
-    createCard(element.img, element.price, element.title, element.dateOfDelivery, element.description)
+data.forEach((element, index) => {
+    createCard(element.img, element.price, element.title, element.dateOfDelivery, element.description, index)
 });})
 
 
 //функция создания элементов 
 
-function createCard(imgSrc, priceProd, nameProd, delDate, description){
+function createCard(imgSrc, priceProd, nameProd, delDate, description, index){
 
   const cardItem = document.createElement('div'); //сама карточка
   cardItem.className = 'card-item';
+  cardItem.id = index;
 
   const cardImg = document.createElement('div'); //картинка
   cardImg.className = 'card-img';
@@ -50,9 +51,9 @@ descr.className = 'description'
 
  img.src = imgSrc;
  delivery.innerHTML = delDate;
- let saleNumber = 1; //скидка и новая цена
-sale.innerHTML = `${saleNumber}% `;
-price.innerHTML = `${Number(priceProd - (priceProd * saleNumber / 100))} руб`;
+ let saleNumber = getRandomArbitrary(1, 30); //скидка и новая цена
+sale.innerHTML = `${Math.floor(saleNumber)}% `;
+price.innerHTML = `${Math.floor(Number(priceProd - (priceProd * saleNumber / 100)))} руб`;
 oldPrice.innerHTML = priceProd;
 oldPrice.style.textDecoration = 'line-through';
 itemName.innerHTML = nameProd;
@@ -67,29 +68,50 @@ descr.innerHTML = description
   const wrap = document.querySelector('.catalog-wrapper');
   wrap.append(cardItem)
   btn.addEventListener('click', function() {
-    setLS(nameProd, description, priceProd, imgSrc);
+    const index = btn.closest('.card-item').id;
+    console.log(index);
+    setLS(nameProd, description, priceProd, imgSrc, index);
     showCartFromLocalStorage();
-    showCartFromLocalStorage_NEW()
   });
 
   seeMore(cardImg)
 }
 
 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+
 //запись в локал сторэдж
 
-function setLS (title, descr,price, img){
+function setLS (title, descr,price, img, id){
 
 const card = {
     'title': title ,
     'description':descr,
     'price': price,
-    'img': img
+    'img': img,
+    'id': id
   };
 
 let cards = localStorage.getItem("cards") ? JSON.parse(localStorage.getItem("cards")) : [];
-cards.push(card);
+let flag = false;
+cards.forEach(cardItem => {
+  if(cardItem.id == card.id){
+flag = true;
+alert("Такой товар уже есть в корзине");
+}
+})
+
+if(!flag){
+cards.push(card); 
+} 
+// }else{
   
+// }
+
+
 localStorage.setItem('cards', JSON.stringify(cards));
 }
 
@@ -155,16 +177,33 @@ function seeCard(button){
     });
   }
 
+// const cartC = document.createElement("div");
+// cartC.className = "cart-container";
+
+const cartC = document.querySelector('.cart-container');
+const cartList = document.createElement('div');
+cartList.className = 'cart-list';
+cartC.append(cartList)
+const button = document.createElement("button");
+button.innerHTML = "Закрыть корзину";
+cartC.append(button);
+
+
 //посмотреть корзину
   function showCartFromLocalStorage() {
-const cartC = document.createElement("div");
-cartC.className = "cart-container";
+cartList.innerHTML = "";
+cartC.classList.add('active');
 const cards = localStorage.getItem('cards');
       if (cards) {
 const cartItems = JSON.parse(cards);
+if(cartItems.length == 0){
+  cartList.innerHTML = `<p class ="cartlist-text">Корзина пуста</p>`;
+
+}else{
 cartItems.forEach(cardItem => {
 const cartItem = document.createElement("div");
 cartItem.className = "cart-item";
+cartItem.id = cardItem.id;
 const titleItem = document.createElement("span");
 titleItem.className = "cart-item_title";
 const deleteItem = document.createElement('span');
@@ -176,22 +215,15 @@ itemImg.className = 'item-img';
 titleItem.innerHTML = `Товар ${cardItem.title}`;
 priceItem.innerHTML = `Цена: ${cardItem.price}`;
 itemImg.src = cardItem.img;
-cartC.append(cartItem);
 cartItem.append(itemImg, priceItem, titleItem, deleteItem);
-const wrap = document.getElementsByClassName("catalog-wrapper")[0];
-wrap.append(cartC);
+cartList.append(cartItem);
   removefromLS (deleteItem, cartItem)
  }
- )}
-
-//  const allSum = 0;
-//  allSum.innerHTML = ` Общая сумма: ${getSum()}`;
-const button = document.createElement("button");
-button.innerHTML = "Закрыть корзину";
-cartC.append(button);
+ )}}
 button.addEventListener("click",  () => {
-   button.parentElement.remove(cartC)
-    console.log(button.parentElement);
+  cartC.classList.remove('active');
+    // console.log(button.parentElement);
+    
   })
    
    }  
@@ -199,16 +231,16 @@ button.addEventListener("click",  () => {
   function removefromLS (deleteItem, cartItem){
     deleteItem.addEventListener('click', function (){
       deleteItem.parentElement.remove(cartItem)
-        console.log(deleteItem.parentElement.firstChild.src);
+        console.log(deleteItem.parentElement);
         let cards = localStorage.getItem("cards") ? JSON.parse(localStorage.getItem("cards")) : [];
         cards.forEach((card, index) => {
-          if(deleteItem.parentElement.firstChild.src == card.img){
+          if(deleteItem.parentElement.id == card.id){
             cards.splice(index, index + 1);
             localStorage.setItem("cards", JSON.stringify(cards));
           }
         })
         localStorage.setItem("cards", JSON.stringify(cards));
-        // showCartFromLocalStorage();
+        showCartFromLocalStorage();
     });
   }
 
