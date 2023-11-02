@@ -22,6 +22,11 @@ function createCard(imgSrc, priceProd, nameProd, delDate, description, index){
   cardImg.className = 'card-img';
   const img = document.createElement('img');
 
+  const like = document.createElement('span');
+  like.innerHTML = '<i class="fa-regular fa-heart"></i>';
+
+cardImg.appendChild(like);
+
   const cardText = document.createElement('div'); //текст под картинкой
   cardText.className = 'card-text';
 
@@ -50,7 +55,7 @@ descr.className = 'description'
 
 
  img.src = imgSrc;
- delivery.innerHTML = delDate;
+ delivery.innerHTML = `Доставка: ${delDate}`;
  let saleNumber = getRandomArbitrary(1, 30); //скидка и новая цена
 sale.innerHTML = `${Math.floor(saleNumber)}% `;
 price.innerHTML = `${Math.floor(Number(priceProd - (priceProd * saleNumber / 100)))} руб`;
@@ -122,7 +127,9 @@ function seeMore(img){
     const btn_details = document.createElement('button');
     btn_details.className = 'none-btn';
     btn_details.innerHTML = 'Подробнее';
+
     img.append(btn_details);
+
      img.addEventListener('mouseenter', () => {
         btn_details.className = 'details';
     });
@@ -159,11 +166,16 @@ function seeCard(button){
       const textContainer = document.createElement('div');
       textContainer.className = 'textContainer'
       const priceElement = document.createElement('span');
+      priceElement.className = 'price-element';
       priceElement.innerHTML = `Цена ${price}`;
       const titleElement = document.createElement('span');
-      titleElement.innerHTML = `Название ${title}`;
+      titleElement.className = 'title-element';
+      titleElement.innerHTML = ` ${title}`;
+      const btn_cardDetails = document.createElement('button');
+      btn_cardDetails.className = 'btn_cardDetails';
+      btn_cardDetails.innerHTML = 'В корзину'
   
-      textContainer.append(priceElement, titleElement)
+      textContainer.append(titleElement ,priceElement, btn_cardDetails)
   
       newCard.appendChild(imgElement);
       newCard.appendChild(textContainer);
@@ -174,6 +186,8 @@ function seeCard(button){
       btn_done.addEventListener('click', ()=>{
         document.body.removeChild(newCard)
       })
+
+      btn_cardDetails.addEventListener('click', )
     });
   }
 

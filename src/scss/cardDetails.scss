@@ -1,7 +1,7 @@
 // body{
 // position: relative;
 // }
-.card-details{
+.card-details {
     width: 80%;
     height: 80vh;
     background-color: white;
@@ -16,17 +16,18 @@
     z-index: 5;
     background-color: white;
     border-radius: 30px;
-   overflow: hidden;
+    overflow: hidden;
+    box-shadow: 0 2px 30px 0 rgba(0,0,0,.2);
 
-    .imgElement{
+    .imgElement {
         width: 50%;
         height: 100%;
         overflow: hidden;
         // padding: 20px;
         text-align: center;
-        
 
-        img{
+
+        img {
             width: 100%;
             // height: 100%;
             object-fit: contain;
@@ -34,12 +35,49 @@
         }
     }
 
-    .textContainer{
+    .textContainer {
         width: 40%;
         padding: 30px;
-        // position: relative;
+        position: relative;
+
+        span {
+            display: block;
+        }
+
+        .title-element {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .price-element {
+            font-size: 14px;
+        }
+
+        button {
+            position: absolute;
+            bottom: 10px;
+            left: 30%;
+            margin-top: 5px;
+            font-weight: 400; 
+            background: linear-gradient(102.42deg,#da15b8 59.69%,#8d06cc);
+            padding: 5px 11px 6px;
+          
+            line-height: 17px;
+            width: 200px;
+            height: 47px;
+            background-color: #cb11ab;
+            cursor: pointer;
+color: white;
+  font-size: 24px;
+  border: none;
+            border-radius: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+
+        }
     }
-    .done{
+
+    .done {
         // position: absolute;
         width: 50px;
         height: 50px;
@@ -52,20 +90,18 @@
         border-radius: 50%;
         position: relative;
         cursor: pointer;
-&:hover{
-    background: rgb(146, 30, 146) ;
-}
-        &::after{
-position: absolute;
-content: '\00d7';
-right: 11px;
-top: -3px;
-color: white; 
+
+        &:hover {
+            background: rgb(146, 30, 146);
+        }
+
+        &::after {
+            position: absolute;
+            content: '\00d7';
+            right: 11px;
+            top: -3px;
+            color: white;
 
         }
-      }
     }
-
-
-
-
+}
