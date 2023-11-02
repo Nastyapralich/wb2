@@ -1,0 +1,25 @@
+.like-list{
+ display: flex;
+ justify-content: space-between;
+ flex-direction: column;
+ .like-item{
+display: flex;
+// justify-content: space-between; 
+align-items: center;
+padding: 10px;
+height: 300px;
+margin-top: 5px;
+margin-bottom: 5px;
+border-bottom: 1px solid black;
+
+span{
+    display: block;
+    margin-left: 20px;
+    font-size: 30px;
+}
+img{
+    height: 100%;
+    display: block;
+}
+ }
+}

@@ -1,11 +1,13 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@300;400&display=swap');
+@import url(./like.scss);
 @import url(./header.scss);
 @import url(./slider.scss);
 @import url(./catalog.scss);
 // @import url(./cartModal.scss);
 @import url(./cardDetails.scss);
 @import url(./cartContainer.scss);
+
 
 * {
     margin: 0;

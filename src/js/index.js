@@ -1,5 +1,5 @@
 import './slider.js';
-
+// import './like.js'
 //получаю объект с сервера
 
 fetch("https://65367a0fbb226bb85dd2306e.mockapi.io/wildberries")
@@ -12,7 +12,7 @@ data.forEach((element, index) => {
 
 //функция создания элементов 
 
-function createCard(imgSrc, priceProd, nameProd, delDate, description, index){
+export function createCard(imgSrc, priceProd, nameProd, delDate, description, index){
 
   const cardItem = document.createElement('div'); //сама карточка
   cardItem.className = 'card-item';
@@ -22,7 +22,7 @@ function createCard(imgSrc, priceProd, nameProd, delDate, description, index){
   cardImg.className = 'card-img';
   const img = document.createElement('img');
 
-  const like = document.createElement('span');
+  const like = document.createElement('span'); // избранное
   like.innerHTML = '<i class="fa-regular fa-heart"></i>';
 
 cardImg.appendChild(like);
@@ -71,7 +71,11 @@ descr.innerHTML = description
   cardItem.append(cardImg,cardText,  btn);
 
   const wrap = document.querySelector('.catalog-wrapper');
-  wrap.append(cardItem)
+  wrap.append(cardItem);
+  like.addEventListener('click', ()=>{
+    setLikeLS(nameProd, description, priceProd, imgSrc, index);
+
+  })
   btn.addEventListener('click', function() {
     const index = btn.closest('.card-item').id;
     console.log(index);
@@ -87,17 +91,35 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+//запись избранного в локал сторэдж
+
+function setLikeLS(title, descr,price, img, id){
+const like ={
+  'title': title ,
+    'description':descr,
+    'price': price,
+    'img': img,
+    'id': id
+}
+
+let likes = localStorage.getItem("likes") ? JSON.parse(localStorage.getItem("likes")) : [];
+likes.push(like);
+
+localStorage.setItem("likes", JSON.stringify(likes))
+}
+
+
 
 //запись в локал сторэдж
 
 function setLS (title, descr,price, img, id){
 
 const card = {
-    'title': title ,
-    'description':descr,
-    'price': price,
-    'img': img,
-    'id': id
+  'title': title ,
+  'description':descr,
+  'price': price,
+  'img': img,
+  'id': id
   };
 
 let cards = localStorage.getItem("cards") ? JSON.parse(localStorage.getItem("cards")) : [];
@@ -112,10 +134,6 @@ alert("Такой товар уже есть в корзине");
 if(!flag){
 cards.push(card); 
 } 
-// }else{
-  
-// }
-
 
 localStorage.setItem('cards', JSON.stringify(cards));
 }
@@ -190,9 +208,6 @@ function seeCard(button){
       btn_cardDetails.addEventListener('click', )
     });
   }
-
-// const cartC = document.createElement("div");
-// cartC.className = "cart-container";
 
 const cartC = document.querySelector('.cart-container');
 const cartList = document.createElement('div');
